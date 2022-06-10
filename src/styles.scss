@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #ebebeb;
+}
+
+
+.row {
+  display: flex;
+}
+
+$base-space: 10px;
+
+.ms-1{
+  margin-left: $base-space;
+}
+.mb-1{
+  margin-bottom: $base-space;
+}
+
+/* ---------- */
+
+.fw-500{
+  font-weight: 500 !important;
+}
+.fw-600{
+  font-weight: 600 !important;
+}
+
+.buttons-row {
+  display: table-cell;
+  width: auto;
+}

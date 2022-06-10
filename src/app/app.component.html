@@ -1,0 +1,22 @@
+
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My Form Builder</span>
+
+  <div class="buttons-row">
+    <button mat-button routerLink="/">Dashboard</button>
+    <button mat-button routerLink="/forms">Forms</button>
+  </div>
+
+  <span class="row-spacer"></span>
+ 
+  <button mat-button>Login</button>
+
+</mat-toolbar>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
+

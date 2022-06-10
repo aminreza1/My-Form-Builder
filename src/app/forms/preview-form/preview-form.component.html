@@ -1,0 +1,90 @@
+<h2>Preview Form : {{form.name}}</h2>
+<p>In this page, you can see the result of the form that you created.</p>
+<div class="mb-1">
+  <button mat-raised-button color="" routerLink="/forms">
+    <mat-icon>keyboard_backspace</mat-icon>
+    Return to forms list
+  </button>
+</div>
+
+
+
+
+
+<form [formGroup]="fieldArray" (ngSubmit)="fieldArray.valid && onSubmitForm()">
+  <mat-card class="mat-elevation-z2">
+    <mat-card-title>{{form.name}}</mat-card-title>
+    <mat-card-subtitle>This form generated automatically  </mat-card-subtitle>
+    <mat-card-content>
+      <div *ngFor="let field of form.fields">
+        <div [ngSwitch]="field.type">
+          <!-- Select -->
+          <div *ngSwitchCase="fieldTypes.select">
+            <mat-form-field appearance="outline">
+              <mat-label>{{field.label}}</mat-label>
+              <mat-select formControlName="{{field.name}}">
+                <mat-option
+                  *ngFor="let opt of field.options"
+                  [value]="opt | lowercase">
+                  {{ opt }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Counter -->          
+          <div *ngSwitchCase="fieldTypes.number">
+            <mat-form-field appearance="outline">
+              <mat-label>{{field.label}}</mat-label>
+              <input matInput type="number" 
+              placeholder="{{field.placeholder}}" 
+              formControlName="{{field.name}}" >
+            </mat-form-field>
+          </div>
+          <!-- CheckBox -->
+          <div *ngSwitchCase="fieldTypes.check" class="check-box">
+            <mat-checkbox formControlName="{{field.name}}">{{field.label}}</mat-checkbox>
+          </div>
+          <!-- Text Area -->
+          <div *ngSwitchCase="fieldTypes.text">
+            <mat-form-field appearance="outline">
+              <mat-label>{{field.label}}</mat-label>
+              <textarea matInput formControlName="{{field.name}}" placeholder="{{field.placeholder}}" rows="5"></textarea>
+            </mat-form-field>
+          </div>
+          <!-- String : TextBox -->
+          <div *ngSwitchCase="fieldTypes.string">           
+            <mat-form-field appearance="outline">
+              <mat-label>{{field.label}}</mat-label>
+              <input
+                matInput
+                type='{{field.isPassword && hidePassword ? "password" : "text"}}'
+                formControlName="{{field.name}}"
+                placeholder="{{field.placeholder}}"
+              />
+              
+              <button mat-icon-button matSuffix *ngIf="field.isPassword" type="button"
+              (click)="hidePassword = !hidePassword" [attr.aria-pressed]="hidePassword">
+                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+
+              <custom-mat-error control="{{field.name}}" ></custom-mat-error>
+            </mat-form-field>     
+          </div>
+          <!-- Date Picker -->
+          <div *ngSwitchCase="fieldTypes.date">
+            <mat-form-field appearance="outline">
+              <mat-label>{{field.label}}</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="{{field.name}}" >
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>  
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Log result in console</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

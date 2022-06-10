@@ -1,0 +1,19 @@
+.row-spacer {
+    flex: 1 1 auto;
+  }
+
+  mat-toolbar{
+    position: fixed;
+    z-index: 999;
+    top: 0;
+  }
+
+  mat-toolbar span{
+    margin-right: 30px;
+  }
+
+  .content {
+    padding: 84px 20px 20px 20px;
+    height: auto;
+    box-sizing: border-box;
+  }
